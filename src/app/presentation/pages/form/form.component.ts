@@ -1,54 +1,62 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  AbstractControl,
-  ValidationErrors,
-  ReactiveFormsModule
-} from '@angular/forms';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
+import { FormGroup, Validators, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { SoftSkillLevelPipe } from '../../pipes/soft-skill-level/soft-skill-level.pipe';
 import { CommonModule } from '@angular/common';
-import { NavigationComponent } from "@/components/navigation/navigation.component";
+import { NavigationComponent } from '@/components/navigation/navigation.component';
+import { MFormFieldModule } from '@mercadona/components/form-field';
+import { MInputModule } from '@mercadona/components/input';
+import { MSelectModule } from '@mercadona/components/select';
+import { nameValidator } from '@/presentation/validators/name.validator';
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SoftSkillLevelPipe, NavigationComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    SoftSkillLevelPipe,
+    NavigationComponent,
+    MFormFieldModule,
+    MInputModule,
+    MSelectModule
+  ],
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormComponent {
-  //readonly #formBuilder: NonNullableFormBuilder = inject(NonNullableFormBuilder);
+  readonly #formBuilder: NonNullableFormBuilder = inject(NonNullableFormBuilder);
 
-  form: FormGroup;
-  areas = ['Comunicación', 'Liderazgo', 'Resolución'];
+  readonly areasOptions: string[] = ['Comunicación', 'Liderazgo', 'Resolución'];
 
-  constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({
-      nombreEvaluador: ['', [Validators.required, this.nombreValidator]],
-      email: ['', [Validators.required, Validators.email]],
-      areaEvaluada: ['', Validators.required],
-      puntuacion: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
-      comentario: ['']
-    });
+  readonly form: FormGroup = this.#formBuilder.group({
+    nombreEvaluador: ['', [Validators.required, nameValidator]],
+    email: ['', [Validators.required, Validators.email]],
+    areaEvaluada: ['', Validators.required],
+    puntuacion: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
+    comentario: ['']
+  });
 
-    this.form.get('puntuacion')?.valueChanges.subscribe((value) => {
-      const comentarioControl = this.form.get('comentario');
-      if (value <= 2) {
-        comentarioControl?.setValidators(Validators.required);
+  readonly puntuacionSignal = signal<number>(this.form.controls.puntuacion.value ?? 0);
+
+  constructor() {
+    effect(() => {
+      const puntuacion = this.puntuacionSignal();
+
+      const comentarioControl = this.form.controls.comentario;
+
+      if (puntuacion <= 2) {
+        comentarioControl.setValidators([Validators.required]);
       } else {
-        comentarioControl?.clearValidators();
+        comentarioControl.clearValidators();
       }
-      comentarioControl?.updateValueAndValidity();
-    });
-  }
 
-  nombreValidator(control: AbstractControl): ValidationErrors | null {
-    const value = control.value;
-    const isValid = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/.test(value);
-    return isValid ? null : { invalidName: 'El nombre no debe contener números ni símbolos.' };
+      comentarioControl.updateValueAndValidity({ emitEvent: false });
+    });
+
+    this.form.controls.puntuacion.valueChanges.subscribe((value) => {
+      this.puntuacionSignal.set(value ?? 0);
+    });
   }
 
   onSubmit(): void {

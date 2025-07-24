@@ -1,53 +1,54 @@
-<div style="padding: 20px">
+<div>
   <h2>Página de prueba del formulario</h2>
   <form autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div>
-      <label for="nombreEvaluador">Nombre del Evaluador:</label>
-      <input id="nombreEvaluador" formControlName="nombreEvaluador" type="text" />
-      <div *ngIf="form.get('nombreEvaluador')?.invalid && form.get('nombreEvaluador')?.touched" style="color: red">
-        {{ form.get('nombreEvaluador')?.errors?.invalidName || 'Este campo es obligatorio.' }}
-      </div>
+      <m-form-field [label]="'Nombre del Evaluador'" [hiddenHint]="true">
+        <input m-input formControlName="nombreEvaluador" />
+      </m-form-field>
     </div>
 
     <div>
-      <label for="email">Email:</label>
-      <input id="email" formControlName="email" type="email" />
-      <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" style="color: red">
-        {{ form.get('email')?.errors?.email ? 'Formato de email inválido.' : 'Este campo es obligatorio.' }}
-      </div>
-    </div>
-
-    <div>
-      <label for="areaEvaluada">Área Evaluada:</label>
-      <select id="areaEvaluada" formControlName="areaEvaluada">
-        <option value="" disabled>Seleccione un área</option>
-        @for (area of areas; track area) {
-          <option [value]="area">{{ area }}</option>
+      <m-form-field [label]="'Email'">
+        <input m-input formControlName="email" type="email" />
+        @if (form.get('email')?.invalid && form.get('email')?.touched) {
+          <m-error>
+            {{ form.get('email')?.errors?.email ? 'Formato de email inválido.' : 'Este campo es obligatorio.' }}
+          </m-error>
         }
-      </select>
-      <div *ngIf="form.get('areaEvaluada')?.invalid && form.get('areaEvaluada')?.touched" style="color: red">
-        Este campo es obligatorio.
-      </div>
+      </m-form-field>
     </div>
 
     <div>
-      <label for="puntuacion">Puntuación:</label>
-      <input id="puntuacion" formControlName="puntuacion" type="number" min="1" max="5" />
-      <div *ngIf="form.get('puntuacion')?.invalid && form.get('puntuacion')?.touched" style="color: red">
-        {{
-          form.get('puntuacion')?.errors?.min || form.get('puntuacion')?.errors?.max
-            ? 'Debe ser un número entre 1 y 5.'
-            : 'Este campo es obligatorio.'
-        }}
-      </div>
+      <m-form-field [label]="'Área Evaluada'">
+        <m-select formControlName="areaEvaluada" [options]="areasOptions"> </m-select>
+        @if (form.get('areaEvaluada')?.invalid && form.get('areaEvaluada')?.touched) {
+          <m-error> Este campo es obligatorio. </m-error>
+        }
+      </m-form-field>
     </div>
 
     <div>
-      <label for="comentario">Comentario:</label>
-      <textarea id="comentario" formControlName="comentario"></textarea>
-      <div *ngIf="form.get('comentario')?.invalid && form.get('comentario')?.touched" style="color: red">
-        Este campo es obligatorio cuando la puntuación es 1 o 2.
-      </div>
+      <m-form-field [label]="'Puntuación'">
+        <input m-input formControlName="puntuacion" type="number" min="1" max="5" />
+        @if (form.get('puntuacion')?.invalid && form.get('puntuacion')?.touched) {
+          <m-error>
+            {{
+              form.get('puntuacion')?.errors?.min || form.get('puntuacion')?.errors?.max
+                ? 'Debe ser un número entre 1 y 5.'
+                : 'Este campo es obligatorio.'
+            }}
+          </m-error>
+        }
+      </m-form-field>
+    </div>
+
+    <div>
+      <m-form-field [label]="'Comentario'">
+        <textarea m-input formControlName="comentario"></textarea>
+        @if (form.get('comentario')?.invalid && form.get('comentario')?.touched) {
+          <m-error> Este campo es obligatorio cuando la puntuación es 1 o 2. </m-error>
+        }
+      </m-form-field>
     </div>
 
     <div>
