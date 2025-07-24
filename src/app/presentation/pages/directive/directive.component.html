@@ -2,7 +2,15 @@
   <div>
     <h2>Página de prueba de la directiva LimitClicks</h2>
     <p>Haz clic en el botón para probar la directiva. El botón se desactivará después de 3 clics.</p>
-    <button appLimitClicks [maxClicks]="3">Haz clic aquí</button>
+    <button
+      m-button
+      type="button"
+      size="small"
+      [appLimitClicks]="3"
+      (disabledState)="onDisabledStateChanged($event)"
+      [disabled]="isButtonDisabled()">
+      Haz clic aquí
+    </button>
   </div>
   <app-navigation />
 </div>
