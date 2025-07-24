@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 
 import { MLoggerService } from '@mercadona/core/logger';
 import { WINDOW } from '@mercadona/core/utils/tokens';
@@ -6,7 +6,8 @@ import { WINDOW } from '@mercadona/core/utils/tokens';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
   protected _window = inject(WINDOW);

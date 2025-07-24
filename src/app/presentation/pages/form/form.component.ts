@@ -1,20 +1,20 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   Validators,
   AbstractControl,
   ValidationErrors,
-  NonNullableFormBuilder,
   ReactiveFormsModule
 } from '@angular/forms';
 import { SoftSkillLevelPipe } from '../../pipes/soft-skill-level/soft-skill-level.pipe';
 import { CommonModule } from '@angular/common';
+import { NavigationComponent } from "@/components/navigation/navigation.component";
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SoftSkillLevelPipe],
+  imports: [CommonModule, ReactiveFormsModule, SoftSkillLevelPipe, NavigationComponent],
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

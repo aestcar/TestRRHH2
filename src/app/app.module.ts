@@ -14,11 +14,13 @@ import { provideMPageError } from '@mercadona/core-ui/page-error';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     AppRoutingModule,
+    RouterModule,
     BrowserAnimationsModule,
     MTranslateModule.forRoot(APP_CONFIG.language),
     MPlatformModule.forRoot({
