@@ -1,0 +1,61 @@
+<form autocomplete="off" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="nombreEvaluador">Nombre del Evaluador:</label>
+    <input id="nombreEvaluador" formControlName="nombreEvaluador" type="text" />
+    <div *ngIf="form.get('nombreEvaluador')?.invalid && form.get('nombreEvaluador')?.touched" style="color: red">
+      {{ form.get('nombreEvaluador')?.errors?.invalidName || 'Este campo es obligatorio.' }}
+    </div>
+  </div>
+
+  <div>
+    <label for="email">Email:</label>
+    <input id="email" formControlName="email" type="email" />
+    <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" style="color: red">
+      {{ form.get('email')?.errors?.email ? 'Formato de email inválido.' : 'Este campo es obligatorio.' }}
+    </div>
+  </div>
+
+  <div>
+    <label for="areaEvaluada">Área Evaluada:</label>
+    <select id="areaEvaluada" formControlName="areaEvaluada">
+      <option value="" disabled>Seleccione un área</option>
+      @for (area of areas; track area) {
+        <option [value]="area">{{ area }}</option>
+      }
+    </select>
+    <div *ngIf="form.get('areaEvaluada')?.invalid && form.get('areaEvaluada')?.touched" style="color: red">
+      Este campo es obligatorio.
+    </div>
+  </div>
+
+  <div>
+    <label for="puntuacion">Puntuación:</label>
+    <input id="puntuacion" formControlName="puntuacion" type="number" min="1" max="5" />
+    <div *ngIf="form.get('puntuacion')?.invalid && form.get('puntuacion')?.touched" style="color: red">
+      {{
+        form.get('puntuacion')?.errors?.min || form.get('puntuacion')?.errors?.max
+          ? 'Debe ser un número entre 1 y 5.'
+          : 'Este campo es obligatorio.'
+      }}
+    </div>
+  </div>
+
+  <div>
+    <label for="comentario">Comentario:</label>
+    <textarea id="comentario" formControlName="comentario"></textarea>
+    <div *ngIf="form.get('comentario')?.invalid && form.get('comentario')?.touched" style="color: red">
+      Este campo es obligatorio cuando la puntuación es 1 o 2.
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="form.invalid">Enviar</button>
+</form>
+
+<div *ngIf="form.valid" style="margin-top: 20px">
+  <h3>Resumen:</h3>
+  <p><strong>Nombre del Evaluador:</strong> {{ form.value.nombreEvaluador }}</p>
+  <p><strong>Email:</strong> {{ form.value.email }}</p>
+  <p><strong>Área Evaluada:</strong> {{ form.value.areaEvaluada }}</p>
+  <p><strong>Puntuación:</strong> {{ form.value.puntuacion | softSkillLevel }}</p>
+  <p><strong>Comentario:</strong> {{ form.value.comentario }}</p>
+</div>

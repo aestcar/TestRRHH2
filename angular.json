@@ -1,0 +1,197 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "yourAppName": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        },
+        "@mercadona/schematics:page": {
+          "cleanScaffolding": true,
+          "standalone": true
+        },
+        "@mercadona/schematics:pipe": {
+          "cleanScaffolding": true,
+          "standalone": true
+        },
+        "@mercadona/schematics:component": {
+          "cleanScaffolding": true,
+          "standalone": true
+        },
+        "@mercadona/schematics:directive": {
+          "cleanScaffolding": true,
+          "standalone": true
+        },
+        "@mercadona/schematics:service": {
+          "cleanScaffolding": true,
+          "standalone": true
+        },
+        "@mercadona/schematics:model": {
+          "cleanScaffolding": true,
+          "standalone": true
+        },
+        "@mercadona/schematics:interface": {
+          "cleanScaffolding": true,
+          "standalone": true
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "browser": "src/main.ts",
+            "outputPath": "dist/",
+            "index": "src/index.html",
+            "polyfills": ["src/polyfills.ts"],
+            "tsConfig": "tsconfig.app.json",
+            "allowedCommonJsDependencies": [
+              "opentracing/lib/span",
+              "xml-utils/find-tags-by-name.js",
+              "opentracing/lib/tracer",
+              "opentracing/lib/constants",
+              "xml-utils/get-attribute.js",
+              "@mercadona/styles",
+              "spark-md5",
+              "hammerjs",
+              "shimmer",
+              "lodash",
+              "lerc",
+              "flat"
+            ],
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "node_modules/@mercadona/styles/fonts",
+                "output": "/assets/fonts/"
+              },
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "node_modules/@mercadona/styles/sass/reset.scss",
+              "node_modules/@mercadona/styles/sass/bootstrap-grid.scss",
+              "node_modules/@mercadona/styles/sass/fonts/font-face.scss",
+              "node_modules/@mercadona/styles/sass/themes/base-theme.scss",
+              "node_modules/@mercadona/styles/sass/themes/dark-mint-theme.scss",
+              "node_modules/@mercadona/styles/sass/elements.scss",
+              "node_modules/@angular/cdk/overlay-prebuilt.css",
+              "src/styles.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["", "src", "src/styles"]
+            },
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all",
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kb"
+                }
+              ],
+              "outputPath": {
+                "base": "dist/",
+                "browser": ""
+              }
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "outputPath": {
+                "base": "dist/",
+                "browser": ""
+              }
+            },
+            "development-preview": {
+              "sourceMap": true,
+              "aot": true,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "namedChunks": true,
+              "statsJson": false,
+              "buildOptimizer": false,
+              "progress": false,
+              "outputHashing": "none",
+              "outputPath": {
+                "base": "dist/",
+                "browser": ""
+              }
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "buildTarget": "yourAppName:build",
+            "proxyConfig": "src/proxy.conf.js"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "yourAppName:build:production"
+            },
+            "development": {
+              "buildTarget": "yourAppName:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": ["src/polyfills.ts", "zone.js/testing"],
+            "tsConfig": "tsconfig.spec.json",
+            "main": "src/test.ts",
+            "karmaConfig": "karma.conf.js",
+            "codeCoverage": true,
+            "watch": true,
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": [
+              "node_modules/@mercadona/styles/sass/reset.scss",
+              "node_modules/@mercadona/styles/sass/bootstrap-grid.scss",
+              "node_modules/@mercadona/styles/sass/fonts/font-face.scss",
+              "node_modules/@mercadona/styles/sass/themes/base-theme.scss",
+              "node_modules/@mercadona/styles/sass/elements.scss",
+              "node_modules/@angular/cdk/overlay-prebuilt.css",
+              "src/styles.scss"
+            ],
+            "codeCoverageExclude": [
+              "src/test.ts",
+              "src/main.ts",
+              "src/polyfills.ts",
+              "src/app/api/swagger/**/*",
+              "src/app/mocks/**/*"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.js", "src/**/*.html", "scripts/**/*.js"]
+          }
+        }
+      }
+    }
+  }
+}

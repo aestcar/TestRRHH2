@@ -1,0 +1,107 @@
+[
+  {
+    "imageUrl": "https://i.pravatar.cc/150?u=AnaGarcía",
+    "firstName": "Ana",
+    "lastName": "García",
+    "company": "Mercadona",
+    "pendingEvaluation": false
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?u=CarlosLópez",
+    "firstName": "Carlos",
+    "lastName": "López",
+    "company": "Irmadona",
+    "pendingEvaluation": true
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?u=MaríaPérez",
+    "firstName": "María",
+    "lastName": "Pérez",
+    "company": "Mercadona",
+    "pendingEvaluation": false
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?u=JavierSánchez",
+    "firstName": "Javier",
+    "lastName": "Sánchez",
+    "company": "Irmadona",
+    "pendingEvaluation": true
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?u=LucíaFernández",
+    "firstName": "Lucía",
+    "lastName": "Fernández",
+    "company": "Mercadona",
+    "pendingEvaluation": false
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?u=PedroMartínez",
+    "firstName": "Pedro",
+    "lastName": "Martínez",
+    "company": "Irmadona",
+    "pendingEvaluation": true
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?u=LauraRodríguez",
+    "firstName": "Laura",
+    "lastName": "Rodríguez",
+    "company": "Mercadona",
+    "pendingEvaluation": false
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?u=DiegoGómez",
+    "firstName": "Diego",
+    "lastName": "Gómez",
+    "company": "Irmadona",
+    "pendingEvaluation": true
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?u=SofíaHernández",
+    "firstName": "Sofía",
+    "lastName": "Hernández",
+    "company": "Mercadona",
+    "pendingEvaluation": false
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?u=MiguelRuiz",
+    "firstName": "Miguel",
+    "lastName": "Ruiz",
+    "company": "Irmadona",
+    "pendingEvaluation": true
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?u=ElenaTorres",
+    "firstName": "Elena",
+    "lastName": "Torres",
+    "company": "Mercadona",
+    "pendingEvaluation": false
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?u=ÁlvaroRamírez",
+    "firstName": "Álvaro",
+    "lastName": "Ramírez",
+    "company": "Irmadona",
+    "pendingEvaluation": true
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?u=IsabelFlores",
+    "firstName": "Isabel",
+    "lastName": "Flores",
+    "company": "Mercadona",
+    "pendingEvaluation": false
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?u=SergioVega",
+    "firstName": "Sergio",
+    "lastName": "Vega",
+    "company": "Irmadona",
+    "pendingEvaluation": true
+  },
+  {
+    "imageUrl": "https://i.pravatar.cc/150?u=AnaMarín",
+    "firstName": "Ana",
+    "lastName": "Marín",
+    "company": "Mercadona",
+    "pendingEvaluation": false
+  }
+]
