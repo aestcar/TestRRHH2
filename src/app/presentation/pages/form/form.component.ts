@@ -29,23 +29,22 @@ export class FormComponent {
     comentario: ['']
   });
 
+  readonly comentarioEffect = effect(() => {
+    const puntuacion = this.#puntuacionSignal();
+    const comentarioControl = this.form.controls.comentario;
+
+    if (puntuacion <= 2) {
+      comentarioControl.setValidators([Validators.required]);
+    } else {
+      comentarioControl.clearValidators();
+    }
+
+    comentarioControl.updateValueAndValidity({ emitEvent: false });
+  });
+
   readonly #puntuacionSignal: WritableSignal<number> = signal<number>(0);
 
   constructor() {
-    effect(() => {
-      const puntuacion = this.#puntuacionSignal();
-
-      const comentarioControl = this.form.controls.comentario;
-
-      if (puntuacion <= 2) {
-        comentarioControl.setValidators([Validators.required]);
-      } else {
-        comentarioControl.clearValidators();
-      }
-
-      comentarioControl.updateValueAndValidity({ emitEvent: false });
-    });
-
     this.form.controls.puntuacion.valueChanges.subscribe((value) => {
       this.#puntuacionSignal.set(value ?? 0); // Espero que Angular cambie los formularios con signals pronto
     });
