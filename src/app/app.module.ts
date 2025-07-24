@@ -15,6 +15,7 @@ import { provideMPageError } from '@mercadona/core-ui/page-error';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
+import { NavigationComponent } from '@/components/navigation/navigation.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +31,8 @@ import { RouterModule } from '@angular/router';
     MTelemetryModule.forRoot({
       url: environment.telemetryConfig.url,
       traces: environment.telemetryConfig.traces
-    })
+    }),
+    NavigationComponent
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

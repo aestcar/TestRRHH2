@@ -1,4 +1,4 @@
-import { SkillLevel } from '@/interfaces/areasOptions.interface';
+import { SkillLevel } from '@/interfaces/skill-level.interface';
 import { SoftSkillLevelMode } from '@/types/soft-skill-level/soft-skill-level.type';
 import { Pipe, PipeTransform } from '@angular/core';
 
