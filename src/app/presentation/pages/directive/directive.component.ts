@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, WritableSignal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Signal, WritableSignal, computed, signal } from '@angular/core';
 import { LimitClicksDirective } from '../../directives/limit-clicks/limit-clicks.directive';
 import { CommonModule } from '@angular/common';
 import { NavigationComponent } from '@/components/navigation/navigation.component';
@@ -13,9 +13,10 @@ import { MButtonComponent } from '@mercadona/components/button';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DirectiveComponent {
-  readonly isButtonDisabled: WritableSignal<boolean> = signal(false);
+  readonly #isButtonDisabled: WritableSignal<boolean> = signal(false);
+  readonly isButtonDisabled: Signal<boolean> = computed(() => this.#isButtonDisabled());
 
   onDisabledStateChanged(isDisabled: boolean): void {
-    this.isButtonDisabled.set(isDisabled);
+    this.#isButtonDisabled.set(isDisabled);
   }
 }
