@@ -32,7 +32,7 @@ export class FormComponent {
   readonly form: FormGroup = this.#formBuilder.group({
     nombreEvaluador: ['', [Validators.required, nameValidator]],
     email: ['', [Validators.required, Validators.email]],
-    areaEvaluada: ['', Validators.required],
+    areaEvaluada: [''],
     puntuacion: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
     comentario: ['']
   });

@@ -33,7 +33,7 @@ export class LimitClicksDirective {
     () => {
       this.#resetSubject
         .pipe(
-          switchMap(() => timer(1000)),
+          switchMap(() => timer(60000)),
           tap(() => {
             this.#clicks.set(0);
             this.disabledState.emit(false);
