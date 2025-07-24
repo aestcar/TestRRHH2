@@ -66,4 +66,11 @@ describe('FormComponent', () => {
     component.onSubmit();
     expect(console.log).toHaveBeenCalledWith('Form Data:', component.form.value);
   });
+
+  it('should not emit form data on invalid submit', () => {
+    spyOn(console, 'log');
+    component.form.controls['nombreEvaluador'].setValue('');
+    component.onSubmit();
+    expect(console.log).not.toHaveBeenCalled();
+  });
 });
