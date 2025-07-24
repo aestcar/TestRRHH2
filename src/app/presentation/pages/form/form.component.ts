@@ -11,15 +11,7 @@ import { nameValidator } from '@/presentation/validators/name.validator';
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    SoftSkillLevelPipe,
-    NavigationComponent,
-    MFormFieldModule,
-    MInputModule,
-    MSelectModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule, SoftSkillLevelPipe, MFormFieldModule, MInputModule, MSelectModule],
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

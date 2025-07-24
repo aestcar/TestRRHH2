@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DirectiveComponent } from './presentation/pages/directive/directive.component';
 import { FormComponent } from '@/pages/form/form.component';
 import { PipeComponent } from '@/pages/pipe/pipe.component';
+import { ExtraComponent } from '@/pages/extra/extra.component';
 
 // IMPORTANT: Do not use the "/error" route as it will be overwritten by the Core module. More info:
 // https://angular.srv.mercadona.com/latest/core-ui/page-error/info/
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'directiva', component: DirectiveComponent },
   { path: 'pipe', component: PipeComponent },
   { path: 'formulario', component: FormComponent },
+  { path: 'extra', component: ExtraComponent },
   { path: '**', redirectTo: 'directiva' }
 ];
 
