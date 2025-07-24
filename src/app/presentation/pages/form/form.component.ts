@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, signal, WritableSignal } from '@angular/core';
 import { FormGroup, Validators, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { SoftSkillLevelPipe } from '../../pipes/soft-skill-level/soft-skill-level.pipe';
 import { CommonModule } from '@angular/common';
@@ -37,11 +37,11 @@ export class FormComponent {
     comentario: ['']
   });
 
-  readonly puntuacionSignal = signal<number>(this.form.controls.puntuacion.value ?? 0);
+  readonly #puntuacionSignal: WritableSignal<number> = signal<number>(0);
 
   constructor() {
     effect(() => {
-      const puntuacion = this.puntuacionSignal();
+      const puntuacion = this.#puntuacionSignal();
 
       const comentarioControl = this.form.controls.comentario;
 
@@ -55,13 +55,12 @@ export class FormComponent {
     });
 
     this.form.controls.puntuacion.valueChanges.subscribe((value) => {
-      this.puntuacionSignal.set(value ?? 0);
+      this.#puntuacionSignal.set(value ?? 0); // Espero que Angular cambie los formularios con signals pronto
     });
   }
 
   onSubmit(): void {
-    if (this.form.valid) {
-      console.log('Form Data:', this.form.value);
-    }
+    if (this.form.invalid) return;
+    console.log('Form Data:', this.form.value);
   }
 }

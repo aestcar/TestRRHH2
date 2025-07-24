@@ -11,6 +11,9 @@
       [disabled]="isButtonDisabled()">
       Haz clic aquí
     </button>
+    @if (isButtonDisabled()) {
+      <p class="limit-message">Se ha alcanzado el límite de clics.</p>
+    }
   </div>
   <app-navigation />
 </div>

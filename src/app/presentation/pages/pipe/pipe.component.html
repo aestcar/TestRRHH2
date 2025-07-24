@@ -3,14 +3,14 @@
   <h3>Normal Mode</h3>
   <ul>
     @for (level of skillLevels(); track level) {
-      <li>Level {{ level }}: {{ level | softSkillLevel }}</li>
+      <li>{{ level }}: {{ level | softSkillLevel }}</li>
     }
   </ul>
 
   <h3>Compact Mode</h3>
   <ul>
     @for (level of skillLevels(); track level) {
-      <li>Level {{ level }}: {{ level | softSkillLevel: 'compact' }}</li>
+      <li>{{ level }}: {{ level | softSkillLevel: 'compact' }}</li>
     }
   </ul>
 

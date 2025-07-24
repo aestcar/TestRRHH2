@@ -5,3 +5,9 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+:host ::ng-deep .limit-reached {
+  background-color: #e0e0e0 !important;
+  cursor: not-allowed !important;
+  color: #9e9e9e !important;
+}
