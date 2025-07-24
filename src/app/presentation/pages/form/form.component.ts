@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, effect, inject, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormGroup, Validators, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { SoftSkillLevelPipe } from '../../pipes/soft-skill-level/soft-skill-level.pipe';
 import { CommonModule } from '@angular/common';
-import { NavigationComponent } from '@/components/navigation/navigation.component';
 import { MFormFieldModule } from '@mercadona/components/form-field';
 import { MInputModule } from '@mercadona/components/input';
 import { MSelectModule } from '@mercadona/components/select';
@@ -25,12 +25,14 @@ export class FormComponent {
     nombreEvaluador: ['', [Validators.required, nameValidator]],
     email: ['', [Validators.required, Validators.email]],
     areaEvaluada: [''],
-    puntuacion: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
+    puntuacion: [1, [Validators.required, Validators.min(1), Validators.max(5)]],
     comentario: ['']
   });
 
+  readonly #puntuacion = toSignal(this.form.controls.puntuacion.valueChanges, { initialValue: 0 });
+
   readonly comentarioEffect = effect(() => {
-    const puntuacion = this.#puntuacionSignal();
+    const puntuacion = this.#puntuacion();
     const comentarioControl = this.form.controls.comentario;
 
     if (puntuacion <= 2) {
@@ -41,14 +43,6 @@ export class FormComponent {
 
     comentarioControl.updateValueAndValidity({ emitEvent: false });
   });
-
-  readonly #puntuacionSignal: WritableSignal<number> = signal<number>(0);
-
-  constructor() {
-    this.form.controls.puntuacion.valueChanges.subscribe((value) => {
-      this.#puntuacionSignal.set(value ?? 0); // Espero que Angular cambie los formularios con signals pronto
-    });
-  }
 
   onSubmit(): void {
     if (this.form.invalid) return;
