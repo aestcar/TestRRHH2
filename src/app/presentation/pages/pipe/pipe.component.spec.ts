@@ -9,8 +9,7 @@ describe('PipeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PipeComponent]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PipeComponent);
     component = fixture.componentInstance;
@@ -19,5 +18,12 @@ describe('PipeComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render a list of skill levels with the pipe', () => {
+    const items: NodeListOf<HTMLLIElement> = fixture.nativeElement.querySelectorAll('ul:first-of-type li');
+    expect(items.length).toBe(5);
+    expect(items[0].textContent).toContain('1:');
+    expect(items[4].textContent).toContain('5:');
   });
 });
