@@ -1,4 +1,4 @@
-export interface AreasOptions {
-  name: string;
-  key: number;
+export interface SkillLevel {
+  text: string;
+  emoji: string;
 }
