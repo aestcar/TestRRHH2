@@ -9,7 +9,7 @@ import { MButtonComponent } from '@mercadona/components/button';
   templateUrl: './directive.component.html',
   styleUrls: ['./directive.component.scss'],
   standalone: true,
-  imports: [CommonModule, MButtonComponent, LimitClicksDirective, NavigationComponent],
+  imports: [CommonModule, MButtonComponent, LimitClicksDirective],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DirectiveComponent {
